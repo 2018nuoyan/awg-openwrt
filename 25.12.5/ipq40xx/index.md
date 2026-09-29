@@ -5,11 +5,11 @@ title: "OpenWrt 25.12.5 ipq40xx"
 
 # OpenWrt 25.12.5 / ipq40xx
 
-Index of [(root)](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.5](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/)
+当前位置：[首页](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.5](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/)
 
-Choose a subtarget.
+请选择子目标平台。
 
-## Subtargets
+## 子目标平台
 
 - [chromium](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/ipq40xx/chromium/)
 - [generic](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/ipq40xx/generic/)

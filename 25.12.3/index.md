@@ -5,11 +5,11 @@ title: "OpenWrt 25.12.3"
 
 # OpenWrt 25.12.3
 
-Index of [(root)](https://slava-shchipunov.github.io/awg-openwrt/)
+当前位置：[首页](https://slava-shchipunov.github.io/awg-openwrt/)
 
-Choose a target.
+请选择目标平台。
 
-## Targets
+## 目标平台
 
 - [apm821xx](https://slava-shchipunov.github.io/awg-openwrt/25.12.3/apm821xx/)
 - [armsr](https://slava-shchipunov.github.io/awg-openwrt/25.12.3/armsr/)

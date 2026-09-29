@@ -3,20 +3,20 @@ layout: default
 title: "OpenWrt 25.12.2 ipq40xx/mikrotik"
 ---
 
-# AmneziaWG feed
+# AmneziaWG 软件源
 
-Index of [(root)](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.2](https://slava-shchipunov.github.io/awg-openwrt/25.12.2/) / [ipq40xx](https://slava-shchipunov.github.io/awg-openwrt/25.12.2/ipq40xx/)
+当前位置：[首页](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.2](https://slava-shchipunov.github.io/awg-openwrt/25.12.2/) / [ipq40xx](https://slava-shchipunov.github.io/awg-openwrt/25.12.2/ipq40xx/)
 
-- OpenWrt version: `25.12.2`
-- Target: `ipq40xx`
-- Subtarget: `mikrotik`
-- Package architecture: `arm_cortex-a7_neon-vfpv4`
+- OpenWrt 版本：`25.12.2`
+- 目标平台：`ipq40xx`
+- 子目标平台：`mikrotik`
+- 软件包架构：`arm_cortex-a7_neon-vfpv4`
 
-## Upstream OpenWrt target
+## OpenWrt 上游目标平台
 
 [https://downloads.openwrt.org/releases/25.12.2/targets/ipq40xx/mikrotik/](https://downloads.openwrt.org/releases/25.12.2/targets/ipq40xx/mikrotik/)
 
-## Configure Feed
+## 配置软件源
 
 ```sh
 mkdir -p /etc/apk/keys
@@ -24,16 +24,16 @@ wget -O /etc/apk/keys/awg-openwrt-feed.pem "https://slava-shchipunov.github.io/a
 echo "https://slava-shchipunov.github.io/awg-openwrt/25.12.2/ipq40xx/mikrotik/packages.adb" >> /etc/apk/repositories.d/customfeeds.list
 ```
 
-## Install Packages
+## 安装软件包
 
 ```sh
 apk update
-apk add amneziawg-tools kmod-amneziawg luci-proto-amneziawg
+apk add amneziawg-tools kmod-amneziawg luci-proto-amneziawg luci-i18n-amneziawg-zh-cn
 ```
 
 <script src="https://slava-shchipunov.github.io/awg-openwrt/assets/copy-code.js?v=2"></script>
 
-## Feed files
+## 软件源文件
 
 - [amneziawg-tools-1.0.20260223-r1.apk](https://slava-shchipunov.github.io/awg-openwrt/25.12.2/ipq40xx/mikrotik/amneziawg-tools-1.0.20260223-r1.apk)
 - [feed.json](https://slava-shchipunov.github.io/awg-openwrt/25.12.2/ipq40xx/mikrotik/feed.json)

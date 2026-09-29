@@ -1,14 +1,15 @@
 ---
 layout: default
-title: AmneziaWG OpenWrt Feed
+title: AmneziaWG OpenWrt 软件源
 ---
 
-# AmneziaWG OpenWrt Feed
-This GitHub Pages site publishes an APK package feed for OpenWrt 25.12.x and newer.
+# AmneziaWG OpenWrt 软件源
 
-OpenWrt 24.10.x and older are not supported by this feed. Use GitHub Releases artifacts for legacy `.ipk` packages.
+此 GitHub Pages 网站为 OpenWrt 25.12.x 及更高版本发布 APK 软件源。
 
-## Available OpenWrt versions
+此软件源不支持 OpenWrt 24.10.x 及更早版本，请从 GitHub Releases 下载旧版 `.ipk` 软件包。
+
+## 可用的 OpenWrt 版本
 
 - [25.12.0](https://slava-shchipunov.github.io/awg-openwrt/25.12.0/)
 - [25.12.1](https://slava-shchipunov.github.io/awg-openwrt/25.12.1/)

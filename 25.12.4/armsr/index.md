@@ -5,11 +5,11 @@ title: "OpenWrt 25.12.4 armsr"
 
 # OpenWrt 25.12.4 / armsr
 
-Index of [(root)](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.4](https://slava-shchipunov.github.io/awg-openwrt/25.12.4/)
+当前位置：[首页](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.4](https://slava-shchipunov.github.io/awg-openwrt/25.12.4/)
 
-Choose a subtarget.
+请选择子目标平台。
 
-## Subtargets
+## 子目标平台
 
 - [armv7](https://slava-shchipunov.github.io/awg-openwrt/25.12.4/armsr/armv7/)
 - [armv8](https://slava-shchipunov.github.io/awg-openwrt/25.12.4/armsr/armv8/)

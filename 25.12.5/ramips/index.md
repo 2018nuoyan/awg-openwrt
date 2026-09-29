@@ -5,11 +5,11 @@ title: "OpenWrt 25.12.5 ramips"
 
 # OpenWrt 25.12.5 / ramips
 
-Index of [(root)](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.5](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/)
+当前位置：[首页](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.5](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/)
 
-Choose a subtarget.
+请选择子目标平台。
 
-## Subtargets
+## 子目标平台
 
 - [mt7620](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/ramips/mt7620/)
 - [mt7621](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/ramips/mt7621/)

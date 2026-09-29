@@ -3,20 +3,20 @@ layout: default
 title: "OpenWrt 25.12.5 lantiq/xway"
 ---
 
-# AmneziaWG feed
+# AmneziaWG 软件源
 
-Index of [(root)](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.5](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/) / [lantiq](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/lantiq/)
+当前位置：[首页](https://slava-shchipunov.github.io/awg-openwrt/) / [25.12.5](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/) / [lantiq](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/lantiq/)
 
-- OpenWrt version: `25.12.5`
-- Target: `lantiq`
-- Subtarget: `xway`
-- Package architecture: `mips_24kc`
+- OpenWrt 版本：`25.12.5`
+- 目标平台：`lantiq`
+- 子目标平台：`xway`
+- 软件包架构：`mips_24kc`
 
-## Upstream OpenWrt target
+## OpenWrt 上游目标平台
 
 [https://downloads.openwrt.org/releases/25.12.5/targets/lantiq/xway/](https://downloads.openwrt.org/releases/25.12.5/targets/lantiq/xway/)
 
-## Configure Feed
+## 配置软件源
 
 ```sh
 mkdir -p /etc/apk/keys
@@ -24,16 +24,16 @@ wget -O /etc/apk/keys/awg-openwrt-feed.pem "https://slava-shchipunov.github.io/a
 echo "https://slava-shchipunov.github.io/awg-openwrt/25.12.5/lantiq/xway/packages.adb" >> /etc/apk/repositories.d/customfeeds.list
 ```
 
-## Install Packages
+## 安装软件包
 
 ```sh
 apk update
-apk add amneziawg-tools kmod-amneziawg luci-proto-amneziawg
+apk add amneziawg-tools kmod-amneziawg luci-proto-amneziawg luci-i18n-amneziawg-zh-cn
 ```
 
 <script src="https://slava-shchipunov.github.io/awg-openwrt/assets/copy-code.js?v=2"></script>
 
-## Feed files
+## 软件源文件
 
 - [amneziawg-tools-1.0.20260618-r1.apk](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/lantiq/xway/amneziawg-tools-1.0.20260618-r1.apk)
 - [amneziawg-tools-3.1.20260812-r1.apk](https://slava-shchipunov.github.io/awg-openwrt/25.12.5/lantiq/xway/amneziawg-tools-3.1.20260812-r1.apk)
