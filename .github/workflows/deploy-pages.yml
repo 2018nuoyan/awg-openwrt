@@ -1,4 +1,4 @@
-name: Deploy OpenWrt Feed Pages
+name: 部署 OpenWrt 软件源页面
 
 on:
   workflow_dispatch:
@@ -10,16 +10,16 @@ permissions:
 
 jobs:
   deploy-pages:
-    name: Regenerate GitHub Pages site
+    name: 重新生成 GitHub Pages 网站
     runs-on: ubuntu-latest
     concurrency:
       group: gh-pages-publish
       cancel-in-progress: false
     steps:
-      - name: Checkout repository
+      - name: 检出仓库
         uses: actions/checkout@v4
 
-      - name: Restore existing GitHub Pages content
+      - name: 恢复现有 GitHub Pages 内容
         run: |
           set -euo pipefail
 
@@ -29,7 +29,7 @@ jobs:
             git --work-tree=gh-pages-content checkout FETCH_HEAD -- .
           fi
 
-      - name: Update downloads badge data
+      - name: 更新下载徽章数据
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -37,16 +37,16 @@ jobs:
             "$GITHUB_WORKSPACE/gh-pages-content/downloads.json" \
             "$GITHUB_REPOSITORY"
 
-      - name: Check existing feed content
+      - name: 检查现有软件源内容
         run: |
           set -euo pipefail
 
           if [ -z "$(find gh-pages-content -name packages.adb -type f -print -quit)" ]; then
-            echo "No existing gh-pages feed content found."
+            echo "未找到现有的 gh-pages 软件源内容。"
             exit 1
           fi
 
-      - name: Generate GitHub Pages site
+      - name: 生成 GitHub Pages 网站
         run: |
           set -euo pipefail
 
@@ -54,7 +54,7 @@ jobs:
             "$GITHUB_WORKSPACE/gh-pages-content" \
             "https://slava-shchipunov.github.io/awg-openwrt"
 
-      - name: Publish to GitHub Pages branch
+      - name: 发布到 GitHub Pages 分支
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

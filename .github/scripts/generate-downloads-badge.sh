@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-OUTPUT_FILE="${1:?output file is required}"
-REPOSITORY="${2:?repository is required}"
+OUTPUT_FILE="${1:?必须指定输出文件}"
+REPOSITORY="${2:?必须指定仓库}"
 
-: "${GH_TOKEN:?GH_TOKEN is required}"
+: "${GH_TOKEN:?必须设置 GH_TOKEN}"
 
 page_download_counts=$(
   gh api --paginate \
@@ -19,7 +19,7 @@ while IFS= read -r page_downloads; do
   [ -n "$page_downloads" ] || continue
   case "$page_downloads" in
     *[!0-9]*)
-      echo "Invalid download count returned by GitHub API: $page_downloads" >&2
+      echo "GitHub API 返回的下载次数无效：$page_downloads" >&2
       exit 1
       ;;
   esac
@@ -31,11 +31,11 @@ temporary_file="${OUTPUT_FILE}.tmp"
 cat > "$temporary_file" <<EOF
 {
   "schemaVersion": 1,
-  "label": "release downloads",
+  "label": "发行版下载次数",
   "message": "$total_downloads",
   "color": "blue"
 }
 EOF
 mv "$temporary_file" "$OUTPUT_FILE"
 
-echo "Total GitHub release asset downloads: $total_downloads"
+echo "GitHub 发行版资源总下载次数：$total_downloads"

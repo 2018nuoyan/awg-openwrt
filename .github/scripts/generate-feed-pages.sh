@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SITE_DIR="${1:?site directory is required}"
-BASE_URL="${2:?base URL is required}"
+SITE_DIR="${1:?必须指定网站目录}"
+BASE_URL="${2:?必须指定基础 URL}"
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd "$SCRIPT_DIR/../.." && pwd)
 
@@ -31,8 +31,8 @@ EOF
 done < <(find "$SITE_DIR" -mindepth 4 -maxdepth 4 -type d -print0)
 
 cat > "$SITE_DIR/_config.yml" <<'EOF'
-title: AmneziaWG OpenWrt Feed
-description: APK package feed for AmneziaWG on OpenWrt 25.12.x and newer
+title: AmneziaWG OpenWrt 软件源
+description: 适用于 OpenWrt 25.12.x 及更高版本的 AmneziaWG APK 软件源
 theme: jekyll-theme-midnight
 EOF
 
@@ -42,15 +42,16 @@ cp -a "$REPO_ROOT/assets/copy-code.js" "$SITE_DIR/assets/copy-code.js"
 cat > "$SITE_DIR/index.md" <<EOF
 ---
 layout: default
-title: AmneziaWG OpenWrt Feed
+title: AmneziaWG OpenWrt 软件源
 ---
 
-# AmneziaWG OpenWrt Feed
-This GitHub Pages site publishes an APK package feed for OpenWrt 25.12.x and newer.
+# AmneziaWG OpenWrt 软件源
 
-OpenWrt 24.10.x and older are not supported by this feed. Use GitHub Releases artifacts for legacy \`.ipk\` packages.
+此 GitHub Pages 网站为 OpenWrt 25.12.x 及更高版本发布 APK 软件源。
 
-## Available OpenWrt versions
+此软件源不支持 OpenWrt 24.10.x 及更早版本，请从 GitHub Releases 下载旧版 \`.ipk\` 软件包。
+
+## 可用的 OpenWrt 版本
 
 EOF
 
@@ -91,11 +92,11 @@ title: "OpenWrt $version"
 
 # OpenWrt $version
 
-Index of [(root)]($BASE_URL/)
+当前位置：[首页]($BASE_URL/)
 
-Choose a target.
+请选择目标平台。
 
-## Targets
+## 目标平台
 
 EOF
   fi
@@ -112,11 +113,11 @@ title: "OpenWrt $version $target"
 
 # OpenWrt $version / $target
 
-Index of [(root)]($BASE_URL/) / [$version]($version_url/)
+当前位置：[首页]($BASE_URL/) / [$version]($version_url/)
 
-Choose a subtarget.
+请选择子目标平台。
 
-## Subtargets
+## 子目标平台
 
 EOF
   fi
@@ -130,20 +131,20 @@ layout: default
 title: "OpenWrt $version $target/$subtarget"
 ---
 
-# AmneziaWG feed
+# AmneziaWG 软件源
 
-Index of [(root)]($BASE_URL/) / [$version]($version_url/) / [$target]($target_url/)
+当前位置：[首页]($BASE_URL/) / [$version]($version_url/) / [$target]($target_url/)
 
-- OpenWrt version: \`$version\`
-- Target: \`$target\`
-- Subtarget: \`$subtarget\`
-- Package architecture: \`$pkgarch\`
+- OpenWrt 版本：\`$version\`
+- 目标平台：\`$target\`
+- 子目标平台：\`$subtarget\`
+- 软件包架构：\`$pkgarch\`
 
-## Upstream OpenWrt target
+## OpenWrt 上游目标平台
 
 [$openwrt_target_url]($openwrt_target_url)
 
-## Configure Feed
+## 配置软件源
 
 \`\`\`sh
 mkdir -p /etc/apk/keys
@@ -151,16 +152,16 @@ wget -O /etc/apk/keys/awg-openwrt-feed.pem "$BASE_URL/keys/awg-openwrt-feed.pem"
 echo "$adb_url" >> /etc/apk/repositories.d/customfeeds.list
 \`\`\`
 
-## Install Packages
+## 安装软件包
 
 \`\`\`sh
 apk update
-apk add amneziawg-tools kmod-amneziawg luci-proto-amneziawg
+apk add amneziawg-tools kmod-amneziawg luci-proto-amneziawg luci-i18n-amneziawg-zh-cn
 \`\`\`
 
 <script src="$BASE_URL/assets/copy-code.js?v=2"></script>
 
-## Feed files
+## 软件源文件
 
 EOF
 

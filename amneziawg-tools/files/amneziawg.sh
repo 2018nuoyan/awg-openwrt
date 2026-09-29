@@ -6,7 +6,7 @@
 
 AWG=/usr/bin/awg
 if [ ! -x $AWG ]; then
-	logger -t "amneziawg" "error: missing amneziawg-tools (${AWG})"
+	logger -t "amneziawg" "错误：缺少 amneziawg-tools（${AWG}）"
 	exit 0
 fi
 
@@ -61,7 +61,7 @@ proto_amneziawg_is_kernel_mode() {
 		else
 			if ! command -v "${WG_QUICK_USERSPACE_IMPLEMENTATION:-amneziawg-go}" >/dev/null; then
 				ret=$?
-				echo "Please install either kernel module (kmod-amneziawg package) or user-space implementation in /usr/bin/amneziawg-go."
+				echo "请安装内核模块（kmod-amneziawg 软件包）或用户空间实现 /usr/bin/amneziawg-go。"
 				exit $ret
 			else
 				return 1
@@ -94,12 +94,12 @@ proto_amneziawg_setup_peer() {
 	config_get persistent_keepalive "${peer_config}" "persistent_keepalive"
 
 	if [ "${disabled}" -eq 1 ]; then
-		# skip disabled peers
+		# 跳过已禁用的对端
 		return 0
 	fi
 
 	if [ -z "$public_key" ]; then
-		echo "Skipping peer config $peer_config because public key is not defined."
+		echo "对端配置 $peer_config 未定义公钥，已跳过。"
 		return 0
 	fi
 
@@ -182,7 +182,7 @@ proto_amneziawg_setup() {
 	local nohostroute
 	local tunlink
 
-	# AmneziaWG specific parameters
+	# AmneziaWG 专用参数
 	local awg_jc
 	local awg_jmin
 	local awg_jmax
@@ -248,11 +248,11 @@ proto_amneziawg_setup() {
 	config_get_bool awg_disable_cookies "${config}" "awg_disable_cookies" 0
 
 	if proto_amneziawg_is_kernel_mode; then
-		logger -t "amneziawg" "info: using kernel-space kmod-amneziawg for ${AWG}"
+		logger -t "amneziawg" "信息：${AWG} 正在使用内核空间模块 kmod-amneziawg"
 		ip link del dev "${config}" 2>/dev/null
 		ip link add dev "${config}" type amneziawg
 	else
-		logger -t "amneziawg" "info: using user-space amneziawg-go for ${AWG}"
+		logger -t "amneziawg" "信息：${AWG} 正在使用用户空间实现 amneziawg-go"
 		rm -f "/var/run/amneziawg/${config}.sock"
 		amneziawg-go "${config}"
 	fi
@@ -273,7 +273,7 @@ proto_amneziawg_setup() {
 	if [ "${fwmark}" ]; then
 		echo "FwMark=${fwmark}" >> "${awg_cfg}"
 	fi
-	# AmneziaWG parameters
+	# AmneziaWG 参数
 	if [ "${awg_jc}" ]; then
 		echo "Jc=${awg_jc}" >> "${awg_cfg}"
 	fi
@@ -351,7 +351,7 @@ proto_amneziawg_setup() {
 	fi
 	config_foreach proto_amneziawg_setup_peer "amneziawg_${config}"
 
-	# Apply configuration file
+	# 应用配置文件
 	${AWG} setconf "${config}" "${awg_cfg}"
 	AWG_RETURN=$?
 
@@ -384,7 +384,7 @@ proto_amneziawg_setup() {
 		proto_add_ipv6_prefix "$prefix"
 	done
 
-	# endpoint dependency
+	# 端点依赖
 	if [ "${nohostroute}" != "1" ]; then
 		# shellcheck disable=SC2034
 		${AWG} show "${config}" endpoints | \

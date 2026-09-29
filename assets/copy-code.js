@@ -27,8 +27,8 @@
 
       const button = document.createElement('button');
       button.type = 'button';
-      button.textContent = 'Copy';
-      button.setAttribute('aria-label', 'Copy code');
+      button.textContent = '复制';
+      button.setAttribute('aria-label', '复制代码');
       button.style.position = 'absolute';
       button.style.top = '0.5rem';
       button.style.right = '0.5rem';
@@ -42,14 +42,14 @@
 
       button.addEventListener('click', function () {
         copyText(code.innerText).then(function () {
-          button.textContent = 'Copied';
+          button.textContent = '已复制';
           window.setTimeout(function () {
-            button.textContent = 'Copy';
+            button.textContent = '复制';
           }, 1200);
         }).catch(function () {
-          button.textContent = 'Failed';
+          button.textContent = '复制失败';
           window.setTimeout(function () {
-            button.textContent = 'Copy';
+            button.textContent = '复制';
           }, 1200);
         });
       });

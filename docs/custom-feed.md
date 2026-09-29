@@ -1,67 +1,75 @@
-# Custom package feed (GitHub Pages)
+# 自定义软件源（GitHub Pages）
 
-Этот репозиторий публикует полноценный OpenWrt package feed для OpenWrt 25.x и новее, где используется `apk` и APK v3 metadata.
+本仓库通过 GitHub Pages 为使用 `apk` 和 APK v3 元数据的 OpenWrt 25.x 及更高版本发布完整的软件源。
 
-OpenWrt 24.x и более старые версии в GitHub Pages feed не поддерживаются. Для них используйте `.ipk` пакеты из GitHub Releases.
+OpenWrt 24.x 及更早版本不支持此软件源，请从 GitHub Releases 下载对应的 `.ipk` 软件包。
 
-Feed публикуется workflow `.github/workflows/build-feed.yml` в ветку `gh-pages` в формате:
+软件源由工作流 `.github/workflows/build-feed.yml` 发布到 `gh-pages` 分支，目录格式如下：
 
-`/<openwrt-version>/<target>/<subtarget>/`
+```text
+/<openwrt-version>/<target>/<subtarget>/
+```
 
-Пример:
+例如：
 
-`/25.12.3/mediatek/filogic/`
+```text
+/25.12.3/mediatek/filogic/
+```
 
-Корневой сайт feed:
+软件源首页：
 
-`https://slava-shchipunov.github.io/awg-openwrt/`
+```text
+https://slava-shchipunov.github.io/awg-openwrt/
+```
 
-Навигация на сайте построена по уровням:
+网站按以下层级提供导航：
 
-`/<openwrt-version>/`
+```text
+/<openwrt-version>/
+/<openwrt-version>/<target>/
+/<openwrt-version>/<target>/<subtarget>/
+```
 
-`/<openwrt-version>/<target>/`
+软件源包含：
 
-`/<openwrt-version>/<target>/<subtarget>/`
+- `.apk` 软件包；
+- `packages.adb`；
+- 由 SDK 生成的 APK 软件源元数据；
+- 用于验证元数据的公开签名密钥。
 
-В feed публикуются:
+## OpenWrt 25.x 及更高版本
 
-- `.apk` packages
-- `packages.adb`
-- SDK-generated APK repository metadata
-- public signing key для проверки metadata
-
-## OpenWrt 25.x
-
-Сначала установите public signing key:
+首先安装公开签名密钥：
 
 ```sh
 mkdir -p /etc/apk/keys
 wget -O /etc/apk/keys/awg-openwrt-feed.pem https://slava-shchipunov.github.io/awg-openwrt/keys/awg-openwrt-feed.pem
 ```
 
-Затем добавьте feed (замените `VERSION`, `TARGET`, `SUBTARGET`):
+然后添加软件源。请将 `VERSION`、`TARGET` 和 `SUBTARGET` 替换为设备对应的值：
 
 ```sh
 echo "https://slava-shchipunov.github.io/awg-openwrt/VERSION/TARGET/SUBTARGET/packages.adb" >> /etc/apk/repositories.d/customfeeds.list
 apk update
-apk add amneziawg-tools kmod-amneziawg luci-proto-amneziawg
+apk add amneziawg-tools kmod-amneziawg luci-proto-amneziawg luci-i18n-amneziawg-zh-cn
 ```
 
-Минимальная проверка feed:
+最小验证命令：
 
 ```sh
 apk update
 apk add amneziawg-tools
 ```
 
-## Public signing keys
+## 公开签名密钥
 
-Ключи публикуются в стабильном пути:
+签名密钥发布在以下固定地址：
 
-`https://slava-shchipunov.github.io/awg-openwrt/keys/awg-openwrt-feed.pem`
+```text
+https://slava-shchipunov.github.io/awg-openwrt/keys/awg-openwrt-feed.pem
+```
 
-Для доверенной установки добавьте public key в `/etc/apk/keys/`:
+如需可信安装，请将公开密钥保存到 `/etc/apk/keys/`：
 
 ```sh
 mkdir -p /etc/apk/keys
@@ -69,16 +77,16 @@ wget -O /etc/apk/keys/awg-openwrt-feed.pem https://slava-shchipunov.github.io/aw
 apk update
 ```
 
-Workflow подписывает все matrix jobs одним стабильным keypair из GitHub Secrets:
+工作流中的所有矩阵任务使用 GitHub Secrets 中同一组固定密钥签名：
 
 - `AWG_FEED_APK_PRIVATE_KEY`
 - `AWG_FEED_APK_PUBLIC_KEY`
 
-Сгенерировать keypair можно командой:
+可使用以下命令生成密钥对：
 
 ```sh
 openssl ecparam -name prime256v1 -genkey -noout -out awg-openwrt-feed.pem
 openssl ec -in awg-openwrt-feed.pem -pubout > awg-openwrt-feed.pub.pem
 ```
 
-В secrets нужно сохранить содержимое файлов `awg-openwrt-feed.pem` и `awg-openwrt-feed.pub.pem`. Private key не публикуется; public key публикуется на GitHub Pages как `keys/awg-openwrt-feed.pem`.
+将 `awg-openwrt-feed.pem` 和 `awg-openwrt-feed.pub.pem` 的内容分别保存到上述 Secrets。私钥不会公开；公钥会以 `keys/awg-openwrt-feed.pem` 路径发布到 GitHub Pages。

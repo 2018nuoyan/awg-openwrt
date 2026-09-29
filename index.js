@@ -2,11 +2,11 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const core = require('@actions/core');
 
-const version = process.argv[2]; // Получение версии OpenWRT из аргумента командной строки
-const filterTargetsStr = process.argv[3] || ''; // Фильтр по targets (опционально, через запятую)
-const filterSubtargetsStr = process.argv[4] || ''; // Фильтр по subtargets (опционально, через запятую)
+const version = process.argv[2]; // 从命令行参数获取 OpenWrt 版本
+const filterTargetsStr = process.argv[3] || ''; // 按目标平台筛选（可选，使用逗号分隔）
+const filterSubtargetsStr = process.argv[4] || ''; // 按子目标平台筛选（可选，使用逗号分隔）
 
-// Преобразуем строки с запятыми в массивы
+// 将逗号分隔的字符串转换为数组
 const filterTargets = filterTargetsStr ? filterTargetsStr.split(',').map(t => t.trim()).filter(t => t) : [];
 const filterSubtargets = filterSubtargetsStr ? filterSubtargetsStr.split(',').map(s => s.trim()).filter(s => s) : [];
 
@@ -14,12 +14,12 @@ const excludedBuilds = [
   {
     target: 'microchipsw',
     subtarget: 'lan969x',
-    reason: 'OpenWrt 25.12.x SDK fails while packaging kmod-crypto-xxhash: xxhash.ko is built into the kernel for this specialized target',
+    reason: 'OpenWrt 25.12.x SDK 打包 kmod-crypto-xxhash 时失败：此专用目标平台已将 xxhash.ko 内置到内核中',
   },
 ];
 
 if (!version) {
-  core.setFailed('Version argument is required');
+  core.setFailed('必须提供版本参数');
   process.exit(1);
 }
 
@@ -30,7 +30,7 @@ async function fetchHTML(url) {
     const { data } = await axios.get(url);
     return cheerio.load(data);
   } catch (error) {
-    console.error(`Error fetching HTML for ${url}: ${error}`);
+    console.error(`获取 ${url} 的 HTML 时出错：${error}`);
     throw error;
   }
 }
@@ -60,18 +60,18 @@ async function getSubtargets(target) {
 }
 
 async function getDetails(target, subtarget) {
-  // pkgarch from packages/index.json
-  // for apk-based is required change (should work also for ipk-based)
+  // 从 packages/index.json 获取软件包架构
+  // apk 构建必须使用此方式，同时也兼容 ipk 构建
   const indexUrl = `${url}${target}/${subtarget}/packages/index.json`;
   let pkgarch = '';
   try {
     const { data } = await axios.get(indexUrl, { responseType: 'json' });
     pkgarch = data.architecture || '';
   } catch (e) {
-    // keep pkgarch empty
+    // 获取失败时保持软件包架构为空
   }
 
-  // vermagic from kmods directory name (more reliable than parsing kernel filename)
+  // 从 kmods 目录名获取 vermagic，比解析内核文件名更可靠
   const kmodsUrl = `${url}${target}/${subtarget}/kmods/`;
   const $ = await fetchHTML(kmodsUrl);
   let vermagic = '';
@@ -80,7 +80,7 @@ async function getDetails(target, subtarget) {
     const name = $(el).attr('href');
     if (name && name.endsWith('/')) {
       vermagic = name.slice(0, -1);
-      return false; // break
+      return false; // 结束遍历
     }
   });
 
@@ -93,21 +93,21 @@ async function main() {
     const jobConfig = [];
 
     for (const target of targets) {
-      // Пропускаем target, если указан массив фильтров и target не входит в него
+      // 如果指定了目标平台筛选器，则跳过不在其中的平台
       if (filterTargets.length > 0 && !filterTargets.includes(target)) {
         continue;
       }
 
       const subtargets = await getSubtargets(target);
       for (const subtarget of subtargets) {
-        // Пропускаем subtarget, если указан массив фильтров и subtarget не входит в него
+        // 如果指定了子目标平台筛选器，则跳过不在其中的子平台
         if (filterSubtargets.length > 0 && !filterSubtargets.includes(subtarget)) {
           continue;
         }
 
-        // Добавляем в конфигурацию только если:
-        // 1. Оба массива пустые (автоматическая сборка по тегу) - собираем всё
-        // 2. Оба массива НЕ пустые (ручной запуск) - target И subtarget должны быть в своих массивах
+        // 仅在以下情况下加入任务配置：
+        // 1. 两个筛选数组均为空（由标签自动构建），构建全部平台；
+        // 2. 两个筛选数组均非空（手动运行），目标平台和子目标平台都必须匹配。
         const isAutomatic = filterTargets.length === 0 && filterSubtargets.length === 0;
         const isManualMatch = filterTargets.length > 0 && filterSubtargets.length > 0 &&
                               filterTargets.includes(target) && filterSubtargets.includes(subtarget);
@@ -120,7 +120,7 @@ async function main() {
           item => item.target === target && item.subtarget === subtarget
         );
         if (excludedBuild) {
-          core.warning(`Skipping ${target}/${subtarget}: ${excludedBuild.reason}`);
+          core.warning(`跳过 ${target}/${subtarget}：${excludedBuild.reason}`);
           continue;
         }
 

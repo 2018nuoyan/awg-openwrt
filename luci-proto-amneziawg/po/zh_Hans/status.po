@@ -1,0 +1,107 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-proto-amneziawg\n"
+"Language: zh_Hans\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "No AmneziaWG peer handshake yet"
+msgid "Never"
+msgstr "从未"
+
+msgid "%ds ago"
+msgstr "%d 秒前"
+
+msgid "%dm ago"
+msgstr "%d 分钟前"
+
+msgid "%dh ago"
+msgstr "%d 小时前"
+
+msgid "over a day ago"
+msgstr "超过一天前"
+
+msgid "Instance Details"
+msgstr "实例详情"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Public Key"
+msgstr "公钥"
+
+msgid "Listen Port"
+msgstr "监听端口"
+
+msgid "Firewall Mark"
+msgstr "防火墙标记"
+
+msgid "none"
+msgstr "无"
+
+msgid "Dismiss"
+msgstr "关闭"
+
+msgid "Peer Details"
+msgstr "对端详情"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Endpoint"
+msgstr "端点"
+
+msgid "Allowed IPs"
+msgstr "允许的 IP"
+
+msgid "Received Data"
+msgstr "已接收数据"
+
+msgid "Transmitted Data"
+msgstr "已发送数据"
+
+msgid "Latest Handshake"
+msgstr "最近握手"
+
+msgid "Keep-Alive"
+msgstr "保活"
+
+msgctxt "AmneziaWG keep alive interval"
+msgid "every %ds"
+msgstr "每 %d 秒"
+
+msgid "Peer"
+msgstr "对端"
+
+msgid "Data Received"
+msgstr "接收数据"
+
+msgid "Data Transmitted"
+msgstr "发送数据"
+
+msgid "No peers connected"
+msgstr "没有已连接的对端"
+
+msgid "Untitled peer"
+msgstr "未命名对端"
+
+msgctxt "Tooltip displaying full AmneziaWG peer public key"
+msgid "Public key: %h"
+msgstr "公钥：%h"
+
+msgid "AmneziaWG Status"
+msgstr "AmneziaWG 状态"
+
+msgctxt "AmneziaWG instance heading"
+msgid "Instance \"%h\""
+msgstr "实例“%h”"
+
+msgctxt "AmneziaWG listen port"
+msgid "Port %d"
+msgstr "端口 %d"
+
+msgid "No AmneziaWG interfaces configured."
+msgstr "尚未配置 AmneziaWG 接口。"
+
+msgid "Loading data…"
+msgstr "正在加载数据…"

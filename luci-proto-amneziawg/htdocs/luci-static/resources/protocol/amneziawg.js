@@ -173,7 +173,7 @@ function buildSVGQRCode(data, code) {
 		}));
 	}
 	catch (e) {
-		console.warn('QR generation failed:', e);
+		console.warn('二维码生成失败：', e);
 
 		code.style.opacity = '';
 		dom.content(code, E('div', {
@@ -206,6 +206,10 @@ const cbiKeyPairGenerate = form.DummyValue.extend({
 
 function handleWindowDragDropIgnore(ev) {
 	ev.preventDefault()
+}
+
+function undefinedConfigValue(name) {
+	return _('# %s not defined').format(name);
 }
 
 return network.registerProtocol('amneziawg', {
@@ -818,7 +822,7 @@ return network.registerProtocol('amneziawg', {
 		o.width = '5%';
 
 		o = ss.option(form.Value, 'description', _('Description'), _('Optional. Description of peer.'));
-		o.placeholder = 'My Peer';
+		o.placeholder = _('My Peer');
 		o.datatype = 'string';
 		o.optional = true;
 		o.width = '30%';
@@ -1033,41 +1037,41 @@ return network.registerProtocol('amneziawg', {
 			return [
 				'[Interface]',
 				'PrivateKey = ' + prv,
-				eips && eips.length ? 'Address = ' + eips.join(', ') : '# Address not defined',
-				eport ? 'ListenPort = ' + eport : '# ListenPort not defined',
-				dns && dns.length ? 'DNS = ' + dns.join(', ') : '# DNS not defined',
-				jc ? 'Jc = ' + jc : '# Jc not defined',
-				jmin ? 'Jmin = ' + jmin : '# Jmin not defined',
-				jmax ? 'Jmax = ' + jmax : '# Jmax not defined',
-				s1 ? 'S1 = ' + s1 : '# S1 not defined',
-				s2 ? 'S2 = ' + s2 : '# S2 not defined',
-				s3 ? 'S3 = ' + s3 : '# S3 not defined',
-				s4 ? 'S4 = ' + s4 : '# S4 not defined',
-				h1 ? 'H1 = ' + h1 : '# H1 not defined',
-				h2 ? 'H2 = ' + h2 : '# H2 not defined',
-				h3 ? 'H3 = ' + h3 : '# H3 not defined',
-				h4 ? 'H4 = ' + h4 : '# H4 not defined',
-				i1 ? 'I1 = ' + i1 : '# I1 not defined',
-				i2 ? 'I2 = ' + i2 : '# I2 not defined',
-				i3 ? 'I3 = ' + i3 : '# I3 not defined',
-				i4 ? 'I4 = ' + i4 : '# I4 not defined',
-				i5 ? 'I5 = ' + i5 : '# I5 not defined',
-				hpk ? 'HeaderProtectionKey = ' + hpk : '# HeaderProtectionKey not defined',
-				cpa ? 'ContentPaddingAddition = ' + cpa : '# ContentPaddingAddition not defined',
-				rat ? 'RekeyAfterTime = ' + rat : '# RekeyAfterTime not defined',
-				rt ? 'RekeyTimeout = ' + rt : '# RekeyTimeout not defined',
-				rjat ? 'RejectAfterTime = ' + rjat : '# RejectAfterTime not defined',
-				kt ? 'KeepaliveTimeout = ' + kt : '# KeepaliveTimeout not defined',
-				mha ? 'MaxHandshakeAttempts = ' + mha : '# MaxHandshakeAttempts not defined',
-				rtr == '1' ? 'RandomTrailers = on' : '# RandomTrailers not defined',
-				dc == '1' ? 'DisableCookies = on' : '# DisableCookies not defined',
+				eips && eips.length ? 'Address = ' + eips.join(', ') : undefinedConfigValue('Address'),
+				eport ? 'ListenPort = ' + eport : undefinedConfigValue('ListenPort'),
+				dns && dns.length ? 'DNS = ' + dns.join(', ') : undefinedConfigValue('DNS'),
+				jc ? 'Jc = ' + jc : undefinedConfigValue('Jc'),
+				jmin ? 'Jmin = ' + jmin : undefinedConfigValue('Jmin'),
+				jmax ? 'Jmax = ' + jmax : undefinedConfigValue('Jmax'),
+				s1 ? 'S1 = ' + s1 : undefinedConfigValue('S1'),
+				s2 ? 'S2 = ' + s2 : undefinedConfigValue('S2'),
+				s3 ? 'S3 = ' + s3 : undefinedConfigValue('S3'),
+				s4 ? 'S4 = ' + s4 : undefinedConfigValue('S4'),
+				h1 ? 'H1 = ' + h1 : undefinedConfigValue('H1'),
+				h2 ? 'H2 = ' + h2 : undefinedConfigValue('H2'),
+				h3 ? 'H3 = ' + h3 : undefinedConfigValue('H3'),
+				h4 ? 'H4 = ' + h4 : undefinedConfigValue('H4'),
+				i1 ? 'I1 = ' + i1 : undefinedConfigValue('I1'),
+				i2 ? 'I2 = ' + i2 : undefinedConfigValue('I2'),
+				i3 ? 'I3 = ' + i3 : undefinedConfigValue('I3'),
+				i4 ? 'I4 = ' + i4 : undefinedConfigValue('I4'),
+				i5 ? 'I5 = ' + i5 : undefinedConfigValue('I5'),
+				hpk ? 'HeaderProtectionKey = ' + hpk : undefinedConfigValue('HeaderProtectionKey'),
+				cpa ? 'ContentPaddingAddition = ' + cpa : undefinedConfigValue('ContentPaddingAddition'),
+				rat ? 'RekeyAfterTime = ' + rat : undefinedConfigValue('RekeyAfterTime'),
+				rt ? 'RekeyTimeout = ' + rt : undefinedConfigValue('RekeyTimeout'),
+				rjat ? 'RejectAfterTime = ' + rjat : undefinedConfigValue('RejectAfterTime'),
+				kt ? 'KeepaliveTimeout = ' + kt : undefinedConfigValue('KeepaliveTimeout'),
+				mha ? 'MaxHandshakeAttempts = ' + mha : undefinedConfigValue('MaxHandshakeAttempts'),
+				rtr == '1' ? 'RandomTrailers = on' : undefinedConfigValue('RandomTrailers'),
+				dc == '1' ? 'DisableCookies = on' : undefinedConfigValue('DisableCookies'),
 				'',
 				'[Peer]',
 				'PublicKey = ' + pub,
-				psk ? 'PresharedKey = ' + psk : '# PresharedKey not used',
-				ips && ips.length ? 'AllowedIPs = ' + ips.join(', ') : '# AllowedIPs not defined',
-				endpoint ? 'Endpoint = ' + endpoint + ':' + port : '# Endpoint not defined',
-				keep ? 'PersistentKeepAlive = ' + keep : '# PersistentKeepAlive not defined'
+				psk ? 'PresharedKey = ' + psk : _('# PresharedKey not used'),
+				ips && ips.length ? 'AllowedIPs = ' + ips.join(', ') : undefinedConfigValue('AllowedIPs'),
+				endpoint ? 'Endpoint = ' + endpoint + ':' + port : undefinedConfigValue('Endpoint'),
+				keep ? 'PersistentKeepAlive = ' + keep : undefinedConfigValue('PersistentKeepAlive')
 			].join('\n');
 		};
 

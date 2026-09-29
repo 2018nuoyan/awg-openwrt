@@ -25,7 +25,7 @@ define Package/amneziawg-tools
   SUBMENU:=VPN
   URL:=https://amnezia.org/
   MAINTAINER:=Amnezia Admin <admin@amnezia.org>
-  TITLE:=AmneziaWG userspace control program (awg)
+  TITLE:=AmneziaWG 用户空间控制程序（awg）
   DEPENDS:= \
 	  +!BUSYBOX_CONFIG_IP:ip \
 	  +!BUSYBOX_CONFIG_FEATURE_IP_LINK:ip \
@@ -33,11 +33,10 @@ define Package/amneziawg-tools
 endef
 
 define Package/amneziawg-tools/description
-  Amnezia VPN — simple and free app to run a self-hosted VPN with
-	high privacy requirements.
+  Amnezia VPN 是一款简单、免费的自托管 VPN 应用，适用于对隐私要求较高的场景。
 
-  This package provides the userspace control program for AmneziaWG,
-  `awg`, a netifd protocol helper, and a re-resolve watchdog script.
+  此软件包提供 AmneziaWG 用户空间控制程序 `awg`、netifd 协议辅助程序，
+  以及用于重新解析端点域名的看门狗脚本。
 endef
 
 define Package/amneziawg-tools/install

@@ -1,0 +1,480 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-proto-amneziawg\n"
+"Language: zh_Hans\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Invalid Base64 key string"
+msgstr "无效的 Base64 密钥字符串"
+
+msgid "Expecting a value or a range (e.g. 10-20) between 0 and %d"
+msgstr "请输入 0 到 %d 之间的值或范围（例如 10-20）"
+
+msgid "H1-H4 ranges must not overlap"
+msgstr "H1–H4 的范围不得重叠"
+
+msgid "Header Protection requires S1-S4 to be between 12 and 65535"
+msgstr "启用报头保护时，S1–S4 必须介于 12 和 65535 之间"
+
+msgid "QR code generation failed. The configuration may be too large."
+msgstr "二维码生成失败，配置内容可能过大。"
+
+msgid "Generate new key pair"
+msgstr "生成新密钥对"
+
+msgid "# %s not defined"
+msgstr "# 未定义 %s"
+
+msgid "# PresharedKey not used"
+msgstr "# 未使用 PresharedKey"
+
+msgid "AmneziaWG VPN"
+msgstr "AmneziaWG VPN"
+
+msgid "Private Key"
+msgstr "私钥"
+
+msgid "Required. Base64-encoded private key for this interface."
+msgstr "必填。此接口的 Base64 编码私钥。"
+
+msgid "Public Key"
+msgstr "公钥"
+
+msgid "Base64-encoded public key of this interface for sharing."
+msgstr "此接口用于共享的 Base64 编码公钥。"
+
+msgid "Error getting PublicKey"
+msgstr "获取公钥时出错"
+
+msgid "Listen Port"
+msgstr "监听端口"
+
+msgid "Optional. UDP port used for outgoing and incoming packets."
+msgstr "可选。收发数据包所使用的 UDP 端口。"
+
+msgid "random"
+msgstr "随机"
+
+msgid "IP Addresses"
+msgstr "IP 地址"
+
+msgid "Recommended. IP addresses of the AmneziaWG interface."
+msgstr "推荐填写。AmneziaWG 接口的 IP 地址。"
+
+msgid "No Host Routes"
+msgstr "不创建主机路由"
+
+msgid "Optional. Do not create host routes to peers."
+msgstr "可选。不为对端创建主机路由。"
+
+msgid "Import configuration"
+msgstr "导入配置"
+
+msgid "Imports settings from an existing AmneziaWG configuration file"
+msgstr "从现有 AmneziaWG 配置文件导入设置"
+
+msgid "Load configuration…"
+msgstr "加载配置…"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Optional. Maximum Transmission Unit of tunnel interface."
+msgstr "可选。隧道接口的最大传输单元。"
+
+msgid "Firewall Mark"
+msgstr "防火墙标记"
+
+msgid "Optional. 32-bit mark for packets during firewall processing. Enter value in hex, starting with <code>0x</code>."
+msgstr "可选。防火墙处理数据包时使用的 32 位标记。请输入以 <code>0x</code> 开头的十六进制值。"
+
+msgid "Invalid hexadecimal value"
+msgstr "无效的十六进制值"
+
+msgid "AmneziaWG Settings"
+msgstr "AmneziaWG 设置"
+
+msgid "Further information about AmneziaWG interfaces and peers at <a href='https://docs.amnezia.org/documentation/amnezia-wg'>amnezia.org</a>."
+msgstr "有关 AmneziaWG 接口和对端的更多信息，请访问 <a href='https://docs.amnezia.org/documentation/amnezia-wg'>amnezia.org</a>。"
+
+msgid "Jc"
+msgstr "Jc"
+
+msgid "Junk packet count."
+msgstr "干扰数据包数量。"
+
+msgid "Jmin"
+msgstr "Jmin"
+
+msgid "Junk packet minimum size."
+msgstr "干扰数据包的最小大小。"
+
+msgid "Jmax"
+msgstr "Jmax"
+
+msgid "Junk packet maximum size."
+msgstr "干扰数据包的最大大小。"
+
+msgid "S1"
+msgstr "S1"
+
+msgid "Handshake initiation packet junk header size."
+msgstr "握手发起数据包的干扰报头大小。"
+
+msgid "S2"
+msgstr "S2"
+
+msgid "Handshake response packet junk header size."
+msgstr "握手响应数据包的干扰报头大小。"
+
+msgid "S3"
+msgstr "S3"
+
+msgid "Cookie reply packet junk header size."
+msgstr "Cookie 回复数据包的干扰报头大小。"
+
+msgid "S4"
+msgstr "S4"
+
+msgid "Transport packet junk header size."
+msgstr "传输数据包的干扰报头大小。"
+
+msgid "H1"
+msgstr "H1"
+
+msgid "Handshake initiation packet type header. A range such as <code>10-20</code> is also accepted. H1-H4 ranges must not overlap."
+msgstr "握手发起数据包的类型报头。也可填写 <code>10-20</code> 这样的范围。H1–H4 的范围不得重叠。"
+
+msgid "H2"
+msgstr "H2"
+
+msgid "Handshake response packet type header. A range such as <code>10-20</code> is also accepted."
+msgstr "握手响应数据包的类型报头。也可填写 <code>10-20</code> 这样的范围。"
+
+msgid "H3"
+msgstr "H3"
+
+msgid "Handshake cookie packet type header. A range such as <code>10-20</code> is also accepted."
+msgstr "握手 Cookie 数据包的类型报头。也可填写 <code>10-20</code> 这样的范围。"
+
+msgid "H4"
+msgstr "H4"
+
+msgid "Transport packet type header. A range such as <code>10-20</code> is also accepted."
+msgstr "传输数据包的类型报头。也可填写 <code>10-20</code> 这样的范围。"
+
+msgid "I1"
+msgstr "I1"
+
+msgid "First special junk packet signature."
+msgstr "第一个特殊干扰数据包的特征码。"
+
+msgid "I2"
+msgstr "I2"
+
+msgid "Second special junk packet signature."
+msgstr "第二个特殊干扰数据包的特征码。"
+
+msgid "I3"
+msgstr "I3"
+
+msgid "Third special junk packet signature."
+msgstr "第三个特殊干扰数据包的特征码。"
+
+msgid "I4"
+msgstr "I4"
+
+msgid "Fourth special junk packet signature."
+msgstr "第四个特殊干扰数据包的特征码。"
+
+msgid "I5"
+msgstr "I5"
+
+msgid "Fifth special junk packet signature."
+msgstr "第五个特殊干扰数据包的特征码。"
+
+msgid "Header Protection Key"
+msgstr "报头保护密钥"
+
+msgid "Optional. 32-byte key encoded in Base64, used to encrypt and obfuscate packet headers. Must match on both sides and requires S1-S4 to be at least 12."
+msgstr "可选。用于加密和混淆数据包报头的 32 字节 Base64 编码密钥。隧道两端必须一致，且 S1–S4 必须不小于 12。"
+
+msgid "Content Padding Addition"
+msgstr "内容填充增量"
+
+msgid "Extra bytes appended to transport packets. A range such as <code>10-20</code> is also accepted."
+msgstr "附加到传输数据包的额外字节数。也可填写 <code>10-20</code> 这样的范围。"
+
+msgid "Rekey After Time"
+msgstr "重新协商间隔"
+
+msgid "Seconds before a session is renegotiated. A range such as <code>110-130</code> is also accepted."
+msgstr "会话重新协商前的秒数。也可填写 <code>110-130</code> 这样的范围。"
+
+msgid "Rekey Timeout"
+msgstr "重新协商超时"
+
+msgid "Seconds between handshake retries. A range such as <code>5-7</code> is also accepted."
+msgstr "握手重试的间隔秒数。也可填写 <code>5-7</code> 这样的范围。"
+
+msgid "Reject After Time"
+msgstr "会话拒绝时间"
+
+msgid "Seconds after which incoming data for the current session is rejected and a new handshake is initiated. A range such as <code>170-190</code> is also accepted."
+msgstr "超过此秒数后将拒绝当前会话的传入数据并发起新握手。也可填写 <code>170-190</code> 这样的范围。"
+
+msgid "Keepalive Timeout"
+msgstr "保活超时"
+
+msgid "Seconds to wait after receiving authenticated data when no authenticated packet is sent before sending a keepalive. A range such as <code>8-12</code> is also accepted."
+msgstr "收到已验证数据后，如果没有发出已验证数据包，则等待多少秒再发送保活包。也可填写 <code>8-12</code> 这样的范围。"
+
+msgid "Max Handshake Attempts"
+msgstr "最大握手尝试次数"
+
+msgid "Maximum number of handshake retries after timeouts. A range such as <code>15-20</code> is also accepted."
+msgstr "超时后的最大握手重试次数。也可填写 <code>15-20</code> 这样的范围。"
+
+msgid "Random Trailers"
+msgstr "随机尾部填充"
+
+msgid "Append random-length trailers to handshake and transport packets: random bytes for handshakes and zero bytes for transport. Must be enabled on both sides. Content Padding Addition takes priority for transport packets."
+msgstr "为握手包和传输包附加随机长度的尾部：握手包填充随机字节，传输包填充零字节。必须在隧道两端同时启用。对于传输包，内容填充增量的优先级更高。"
+
+msgid "Disable Cookies"
+msgstr "禁用 Cookie"
+
+msgid "Do not send Handshake Cookie Reply messages. Received cookies are still processed."
+msgstr "不发送握手 Cookie 回复消息，但仍会处理收到的 Cookie。"
+
+msgid "Peers"
+msgstr "对端"
+
+msgid "Add peer"
+msgstr "添加对端"
+
+msgid "Edit peer"
+msgstr "编辑对端"
+
+msgid "Address setting is invalid"
+msgstr "地址设置无效"
+
+msgid "DNS setting is invalid"
+msgstr "DNS 设置无效"
+
+msgid "PrivateKey setting is missing or invalid"
+msgstr "PrivateKey 设置缺失或无效"
+
+msgid "ListenPort setting is invalid"
+msgstr "ListenPort 设置无效"
+
+msgid "HeaderProtectionKey setting is invalid"
+msgstr "HeaderProtectionKey 设置无效"
+
+msgid "H1-H4 setting is invalid"
+msgstr "H1–H4 设置无效"
+
+msgid "%s setting is invalid"
+msgstr "%s 设置无效"
+
+msgid "PublicKey setting is invalid"
+msgstr "PublicKey 设置无效"
+
+msgid "PresharedKey setting is invalid"
+msgstr "PresharedKey 设置无效"
+
+msgid "AllowedIPs setting is invalid"
+msgstr "AllowedIPs 设置无效"
+
+msgid "Endpoint setting is invalid"
+msgstr "Endpoint 设置无效"
+
+msgid "PersistentKeepAlive setting is invalid"
+msgstr "PersistentKeepAlive 设置无效"
+
+msgid "Cannot parse configuration: %s"
+msgstr "无法解析配置：%s"
+
+msgid "Overwrite the current settings with the imported configuration?"
+msgstr "是否用导入的配置覆盖当前设置？"
+
+msgid "Imported peer configuration"
+msgstr "导入的对端配置"
+
+msgid "Select file…"
+msgstr "选择文件…"
+
+msgid "Select, drag or paste a valid <em>*.conf</em> file below to configure the local AmneziaWG interface."
+msgstr "在下方选择、拖放或粘贴有效的 <em>*.conf</em> 文件，以配置本地 AmneziaWG 接口。"
+
+msgid "Select, paste or drag a AmneziaWG configuration (commonly <em>wg0.conf</em>) from another system below to create a matching peer entry allowing that system to connect to the local AmneziaWG interface."
+msgstr "在下方选择、粘贴或拖放另一系统的 AmneziaWG 配置（通常为 <em>wg0.conf</em>），以创建匹配的对端条目，使该系统能够连接本地 AmneziaWG 接口。"
+
+msgid "To configure fully the local AmneziaWG interface from an existing (e.g. provider supplied) configuration file, use the <strong><a class=\"full-import\" href=\"#\">configuration import</a></strong> instead."
+msgstr "若要使用现有配置文件（例如服务商提供的文件）完整配置本地 AmneziaWG 接口，请改用<strong><a class=\"full-import\" href=\"#\">配置导入</a></strong>。"
+
+msgid "Paste or drag supplied AmneziaWG configuration file…"
+msgstr "粘贴或拖放提供的 AmneziaWG 配置文件…"
+
+msgid "Paste or drag AmneziaWG peer configuration (wg0.conf) file…"
+msgstr "粘贴或拖放 AmneziaWG 对端配置（wg0.conf）文件…"
+
+msgid "Import as peer"
+msgstr "作为对端导入"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Import settings"
+msgstr "导入设置"
+
+msgid "Import configuration as peer…"
+msgstr "将配置作为对端导入…"
+
+msgid "No peers defined yet."
+msgstr "尚未定义对端。"
+
+msgid "Disabled"
+msgstr "已禁用"
+
+msgid "Enable / Disable peer. Restart amneziawg interface to apply changes."
+msgstr "启用或禁用对端。重启 AmneziaWG 接口后更改才会生效。"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Optional. Description of peer."
+msgstr "可选。对端的描述。"
+
+msgid "My Peer"
+msgstr "我的对端"
+
+msgid "Untitled peer"
+msgstr "未命名对端"
+
+msgid "AmneziaWG peer is disabled"
+msgstr "AmneziaWG 对端已禁用"
+
+msgctxt "Label indicating that AmneziaWG peer is disabled"
+msgid "Disabled"
+msgstr "已禁用"
+
+msgid "Public key is missing"
+msgstr "缺少公钥"
+
+msgctxt "Label indicating that AmneziaWG peer lacks public key"
+msgid "Key missing"
+msgstr "缺少密钥"
+
+msgctxt "Tooltip displaying full AmneziaWG peer public key"
+msgid "Public key: %h"
+msgstr "公钥：%h"
+
+msgid "Private key present"
+msgstr "已保存私钥"
+
+msgctxt "Label indicating that AmneziaWG peer private key is stored"
+msgid "Private"
+msgstr "私钥"
+
+msgid "Preshared key in use"
+msgstr "正在使用预共享密钥"
+
+msgctxt "Label indicating that AmneziaWG peer uses a PSK"
+msgid "PSK"
+msgstr "PSK"
+
+msgid "Required. Public key of the AmneziaWG peer."
+msgstr "必填。AmneziaWG 对端的公钥。"
+
+msgid "Optional. Private key of the AmneziaWG peer. The key is not required for establishing a connection but allows generating a peer configuration or QR code if available. It can be removed after the configuration has been exported."
+msgstr "可选。AmneziaWG 对端的私钥。建立连接不需要此密钥，但保存密钥后可以生成对端配置或二维码。导出配置后可将其删除。"
+
+msgid "Preshared Key"
+msgstr "预共享密钥"
+
+msgid "Optional. Base64-encoded preshared key. Adds in an additional layer of symmetric-key cryptography for post-quantum resistance."
+msgstr "可选。Base64 编码的预共享密钥，可增加一层对称密钥加密以增强抗量子攻击能力。"
+
+msgid "Generate preshared key"
+msgstr "生成预共享密钥"
+
+msgid "Allowed IPs"
+msgstr "允许的 IP"
+
+msgid "Optional. IP addresses and prefixes that this peer is allowed to use inside the tunnel. Usually the peer's tunnel IP addresses and the networks the peer routes through the tunnel."
+msgstr "可选。允许此对端在隧道内使用的 IP 地址和前缀，通常是对端的隧道 IP 地址及其通过隧道路由的网络。"
+
+msgctxt "Label indicating further amount of allowed ips"
+msgid "+ %d more"
+msgstr "另有 %d 项"
+
+msgid "Route Allowed IPs"
+msgstr "路由允许的 IP"
+
+msgid "Optional. Create routes for Allowed IPs for this peer."
+msgstr "可选。为此对端允许的 IP 创建路由。"
+
+msgid "Endpoint Host"
+msgstr "端点主机"
+
+msgid "Optional. Host of peer. Names are resolved prior to bringing up the interface."
+msgstr "可选。对端主机。接口启动前会解析主机名。"
+
+msgid "Endpoint Port"
+msgstr "端点端口"
+
+msgid "Optional. Port of peer."
+msgstr "可选。对端端口。"
+
+msgid "Persistent Keep Alive"
+msgstr "持续保活"
+
+msgid "Optional. Seconds between keep alive messages. Default is 0 (disabled). Recommended value if this device is behind a NAT is 25. A range such as <code>20-30</code> is also accepted."
+msgstr "可选。保活消息的间隔秒数，默认为 0（禁用）。如果此设备位于 NAT 后，建议设为 25。也可填写 <code>20-30</code> 这样的范围。"
+
+msgid "Configuration Export"
+msgstr "导出配置"
+
+msgid "Generates a configuration suitable for import on a AmneziaWG peer"
+msgstr "生成适合导入 AmneziaWG 对端的配置"
+
+msgid "The generated configuration can be imported into a WireGuard client application to set up a connection towards this device."
+msgstr "生成的配置可导入 WireGuard 客户端应用，以建立到此设备的连接。"
+
+msgid "Connection endpoint"
+msgstr "连接端点"
+
+msgid "The public hostname or IP address of this system the peer should connect to. This usually is a static public IP address, a static hostname or a DDNS domain."
+msgstr "对端应连接的本机公网主机名或 IP 地址，通常是静态公网 IP、静态主机名或 DDNS 域名。"
+
+msgid "IP addresses that are allowed inside the tunnel. The peer will accept tunnelled packets with source IP addresses matching this list and route back packets with matching destination IP."
+msgstr "隧道内允许的 IP 地址。对端将接受源 IP 与此列表匹配的隧道数据包，并路由回目标 IP 匹配的数据包。"
+
+msgid "DNS Servers"
+msgstr "DNS 服务器"
+
+msgid "DNS servers for the remote clients using this tunnel to your openwrt device. Some wireguard clients require this to be set."
+msgstr "远程客户端通过此隧道连接 OpenWrt 设备时使用的 DNS 服务器。某些 WireGuard 客户端要求设置此项。"
+
+msgid "Addresses"
+msgstr "地址"
+
+msgid "IP addresses for the peer to use inside the tunnel. Some clients require this setting."
+msgstr "对端在隧道内使用的 IP 地址。某些客户端要求设置此项。"
+
+msgid "Generating QR code…"
+msgstr "正在生成二维码…"
+
+msgid "Generate configuration"
+msgstr "生成配置"
+
+msgid "Generate configuration…"
+msgstr "生成配置…"
+
+msgid "Back to peer configuration"
+msgstr "返回对端配置"
+
+msgid "No fixed interface listening port defined, peers might not be able to initiate connections to this AmneziaWG instance!"
+msgstr "未定义固定的接口监听端口，对端可能无法主动连接到此 AmneziaWG 实例！"

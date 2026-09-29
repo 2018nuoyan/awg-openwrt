@@ -18,7 +18,7 @@ define KernelPackage/amneziawg
 	SECTION:=kernel
 	CATEGORY:=Kernel modules
 	SUBMENU:=Network Support
-	TITLE:=AmneziaWG VPN Kernel Module
+	TITLE:=AmneziaWG VPN 内核模块
 	FILES:=$(PKG_BUILD_DIR)/$(MAKE_PATH)/amneziawg.ko
 	DEPENDS:= \
 		+kmod-udptunnel4 \

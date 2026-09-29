@@ -1,7 +1,7 @@
 {
   "name": "awg-openwrt",
   "version": "1.0.0",
-  "description": "Amnezia Wireguard packages for OpenWRT",
+  "description": "适用于 OpenWrt 的 AmneziaWG 软件包",
   "main": "index.js",
   "scripts": {
     "get-build-envs": "node index.js"

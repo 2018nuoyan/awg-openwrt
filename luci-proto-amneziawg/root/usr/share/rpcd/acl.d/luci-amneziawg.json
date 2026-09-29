@@ -1,6 +1,6 @@
 {
 	"luci-proto-amneziawg": {
-		"description": "Grant access to LuCI AmneziaWG procedures",
+		"description": "授予访问 LuCI AmneziaWG 过程的权限",
 		"read": {
 			"ubus": {
 				"luci.amneziawg": [

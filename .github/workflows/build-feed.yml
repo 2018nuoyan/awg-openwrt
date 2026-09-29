@@ -1,18 +1,18 @@
-name: Build OpenWrt Feed
+name: 构建 OpenWrt 软件源
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: "OpenWRT version with apk support (25.x or newer, e.g., 25.12.3)"
+        description: "支持 apk 的 OpenWrt 版本（25.x 或更高版本，例如 25.12.3）"
         required: true
         type: string
       targets:
-        description: "Targets (comma-separated, optional)"
+        description: "目标平台（使用逗号分隔，可选）"
         required: false
         type: string
       subtargets:
-        description: "Subtargets (comma-separated, optional)"
+        description: "子目标平台（使用逗号分隔，可选）"
         required: false
         type: string
 
@@ -25,26 +25,26 @@ jobs:
     outputs:
       job-config: ${{ steps.generate-config.outputs.job-config }}
     steps:
-      - name: Checkout code
+      - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: 配置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20.16.0"
 
-      - name: Prepare build inputs
+      - name: 准备构建输入
         run: |
           set -euo pipefail
           VERSION="${{ inputs.version }}"
           MAJOR_VERSION="${VERSION%%.*}"
           if ! printf '%s\n' "$MAJOR_VERSION" | grep -Eq '^[0-9]+$'; then
-            echo "Invalid OpenWrt version: $VERSION"
+            echo "无效的 OpenWrt 版本：$VERSION"
             exit 1
           fi
           if [ "$MAJOR_VERSION" -lt 25 ]; then
-            echo "GitHub Pages package feed is supported only for OpenWrt 25.x or newer (apk/packages.adb)."
-            echo "Use GitHub Releases artifacts for OpenWrt $VERSION."
+            echo "GitHub Pages 软件源仅支持 OpenWrt 25.x 或更高版本（apk/packages.adb）。"
+            echo "OpenWrt $VERSION 请使用 GitHub Releases 中的构建产物。"
             exit 1
           fi
 
@@ -58,18 +58,18 @@ jobs:
             echo "SUBTARGETS=${{ inputs.subtargets }}" >> "$GITHUB_ENV"
           fi
 
-      - name: Install dependencies
+      - name: 安装依赖
         run: npm install
 
       # Reuse existing matrix generation logic from release workflow.
-      - name: Generate job config
+      - name: 生成任务配置
         id: generate-config
         run: node index.js "${{ env.VERSION }}" "${{ env.TARGETS }}" "${{ env.SUBTARGETS }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-feed:
-    name: "v${{ matrix.build_env.tag }} - ${{ matrix.build_env.pkgarch }} :: feed"
+    name: "v${{ matrix.build_env.tag }} - ${{ matrix.build_env.pkgarch }} :: 软件源"
     runs-on: ubuntu-latest
     needs: generate-config
     defaults:
@@ -88,10 +88,10 @@ jobs:
         build_env: ${{ fromJson(needs.generate-config.outputs.job-config) }}
       fail-fast: false
     steps:
-      - name: Checkout AWG source code
+      - name: 检出 AWG 源代码
         uses: actions/checkout@v4
 
-      - name: Setup SDK and feeds
+      - name: 配置 SDK 和软件源
         env:
           AWG_FEED_APK_PRIVATE_KEY: ${{ secrets.AWG_FEED_APK_PRIVATE_KEY }}
           AWG_FEED_APK_PUBLIC_KEY: ${{ secrets.AWG_FEED_APK_PUBLIC_KEY }}
@@ -99,7 +99,7 @@ jobs:
           set -euo pipefail
           SDK_DIR="${OPENWRT_SDK_DIR:-/builder}"
           if [ ! -d "$SDK_DIR" ]; then
-            echo "OpenWrt SDK directory not found: $SDK_DIR"
+            echo "未找到 OpenWrt SDK 目录：$SDK_DIR"
             exit 1
           fi
           SDK_DIR=$(cd "$SDK_DIR" && pwd)
@@ -116,8 +116,8 @@ jobs:
           # private-key.pem/public-key.pem. The older usign key-build files are
           # for opkg feeds and cannot verify packages.adb signatures.
           if [ -z "${AWG_FEED_APK_PRIVATE_KEY:-}" ] || [ -z "${AWG_FEED_APK_PUBLIC_KEY:-}" ]; then
-            echo "Missing AWG_FEED_APK_PRIVATE_KEY and/or AWG_FEED_APK_PUBLIC_KEY repository secrets."
-            echo "Generate them with:"
+            echo "仓库中缺少 AWG_FEED_APK_PRIVATE_KEY 和/或 AWG_FEED_APK_PUBLIC_KEY Secret。"
+            echo "请使用以下命令生成："
             echo "openssl ecparam -name prime256v1 -genkey -noout -out awg-openwrt-feed.pem"
             echo "openssl ec -in awg-openwrt-feed.pem -pubout > awg-openwrt-feed.pub.pem"
             exit 1
@@ -141,7 +141,7 @@ jobs:
           # container can be reused by multiple steps, so appending to an
           # existing feeds.conf is not idempotent.
           if [ ! -f feeds.conf.default ]; then
-            echo "feeds.conf.default is missing"
+            echo "缺少 feeds.conf.default"
             exit 1
           fi
           cp feeds.conf.default feeds.conf
@@ -161,17 +161,18 @@ jobs:
           echo "CONFIG_PACKAGE_amneziawg-tools=y" >> .config
           echo "CONFIG_PACKAGE_luci-proto-amneziawg=y" >> .config
           echo "CONFIG_PACKAGE_luci-i18n-amneziawg-ru=y" >> .config
+          echo "CONFIG_PACKAGE_luci-i18n-amneziawg-zh-cn=y" >> .config
           # Ensure feed metadata/signatures are generated in SDK output.
           echo "CONFIG_SIGNED_PACKAGES=y" >> .config
 
           make defconfig
 
-      - name: Build AmneziaWG packages
+      - name: 构建 AmneziaWG 软件包
         run: |
           set -euo pipefail
           SDK_DIR="${OPENWRT_SDK_DIR:-/builder}"
           if [ ! -d "$SDK_DIR" ]; then
-            echo "OpenWrt SDK directory not found: $SDK_DIR"
+            echo "未找到 OpenWrt SDK 目录：$SDK_DIR"
             exit 1
           fi
           SDK_DIR=$(cd "$SDK_DIR" && pwd)
@@ -191,9 +192,10 @@ jobs:
             ! -name "kmod-amneziawg*.apk" \
             ! -name "luci-proto-amneziawg*.apk" \
             ! -name "luci-i18n-amneziawg-ru*.apk" \
+            ! -name "luci-i18n-amneziawg-zh-cn*.apk" \
             -delete
 
-          echo "AWG feed package files:"
+          echo "AWG 软件源中的软件包文件："
           find "$CANONICAL_AWG_FEED_DIR" -maxdepth 1 -type f -name "*.apk" -printf "%f\n" | sort
 
           # Ensure all expected AWG packages were produced before indexing/publishing.
@@ -201,15 +203,17 @@ jobs:
           ls "$CANONICAL_AWG_FEED_DIR"/kmod-amneziawg*.apk >/dev/null
           ls "$CANONICAL_AWG_FEED_DIR"/luci-proto-amneziawg*.apk >/dev/null
           ls "$CANONICAL_AWG_FEED_DIR"/luci-i18n-amneziawg-ru*.apk >/dev/null
+          ls "$CANONICAL_AWG_FEED_DIR"/luci-i18n-amneziawg-zh-cn*.apk >/dev/null
 
           UNEXPECTED_PACKAGES=$(find "$CANONICAL_AWG_FEED_DIR" -maxdepth 1 -type f -name "*.apk" \
             ! -name "amneziawg-tools*.apk" \
             ! -name "kmod-amneziawg*.apk" \
             ! -name "luci-proto-amneziawg*.apk" \
             ! -name "luci-i18n-amneziawg-ru*.apk" \
+            ! -name "luci-i18n-amneziawg-zh-cn*.apk" \
             -printf "%f\n")
           if [ -n "$UNEXPECTED_PACKAGES" ]; then
-            echo "Unexpected package files in AWG feed:"
+            echo "AWG 软件源中存在意外的软件包文件："
             echo "$UNEXPECTED_PACKAGES"
             exit 1
           fi
@@ -217,7 +221,7 @@ jobs:
           # Generate repository metadata/signatures only after the AWG feed directory is clean.
           make package/index V=s PACKAGE_DIR="$CANONICAL_AWG_FEED_DIR"
 
-          echo "AWG feed metadata:"
+          echo "AWG 软件源元数据："
           find "$CANONICAL_AWG_FEED_DIR" -maxdepth 1 -type f -printf "%f\n" | sort
 
           echo "CANONICAL_AWG_FEED_DIR=$CANONICAL_AWG_FEED_DIR" >> "$GITHUB_ENV"
@@ -225,13 +229,13 @@ jobs:
           # Validate SDK-generated APK repository metadata in canonical feed.
           test -s "$CANONICAL_AWG_FEED_DIR/packages.adb"
 
-      - name: Prepare feed publish directory
+      - name: 准备软件源发布目录
         run: |
           set -euo pipefail
 
           SDK_DIR="${OPENWRT_SDK_DIR:-/builder}"
           if [ ! -d "$SDK_DIR" ]; then
-            echo "OpenWrt SDK directory not found: $SDK_DIR"
+            echo "未找到 OpenWrt SDK 目录：$SDK_DIR"
             exit 1
           fi
           SDK_DIR=$(cd "$SDK_DIR" && pwd)
@@ -259,13 +263,13 @@ jobs:
           cp -a "$SDK_DIR/public-key.pem" "$GITHUB_WORKSPACE/feed-publish/keys/awg-openwrt-feed.pem"
           test -s "$GITHUB_WORKSPACE/feed-publish/keys/awg-openwrt-feed.pem"
 
-      - name: Feed smoke tests
+      - name: 软件源冒烟测试
         run: |
           set -euo pipefail
 
           SDK_DIR="${OPENWRT_SDK_DIR:-/builder}"
           if [ ! -d "$SDK_DIR" ]; then
-            echo "OpenWrt SDK directory not found: $SDK_DIR"
+            echo "未找到 OpenWrt SDK 目录：$SDK_DIR"
             exit 1
           fi
           SDK_DIR=$(cd "$SDK_DIR" && pwd)
@@ -279,12 +283,13 @@ jobs:
           ls "$FEED_DIR"/kmod-amneziawg*.apk >/dev/null
           ls "$FEED_DIR"/luci-proto-amneziawg*.apk >/dev/null
           ls "$FEED_DIR"/luci-i18n-amneziawg-ru*.apk >/dev/null
+          ls "$FEED_DIR"/luci-i18n-amneziawg-zh-cn*.apk >/dev/null
 
           # APK repository must exist and include every AWG package in adb index.
           test -s "$FEED_DIR/packages.adb"
           APK_BIN="$SDK_DIR/staging_dir/host/bin/apk"
           if [ ! -x "$APK_BIN" ]; then
-            echo "OpenWrt host apk tool not found: $APK_BIN"
+            echo "未找到 OpenWrt 主机端 apk 工具：$APK_BIN"
             exit 1
           fi
           ADB_DUMP_FILE="$RUNNER_TEMP/packages.adb.dump"
@@ -293,11 +298,12 @@ jobs:
           grep -q "kmod-amneziawg" "$ADB_DUMP_FILE"
           grep -q "luci-proto-amneziawg" "$ADB_DUMP_FILE"
           grep -q "luci-i18n-amneziawg-ru" "$ADB_DUMP_FILE"
+          grep -q "luci-i18n-amneziawg-zh-cn" "$ADB_DUMP_FILE"
           ! grep -q "busybox" "$ADB_DUMP_FILE"
           ! grep -q "\blibc\b" "$ADB_DUMP_FILE"
           ! grep -q "\bubus\b" "$ADB_DUMP_FILE"
 
-      - name: Upload feed artifact
+      - name: 上传软件源构建产物
         uses: actions/upload-artifact@v4
         with:
           name: feed-${{ matrix.build_env.tag }}-${{ matrix.build_env.target }}-${{ matrix.build_env.subtarget }}-${{ matrix.build_env.pkgarch }}
@@ -305,7 +311,7 @@ jobs:
           if-no-files-found: error
 
   deploy:
-    name: Deploy feed to gh-pages
+    name: 将软件源部署到 gh-pages
     runs-on: ubuntu-latest
     needs: build-feed
     if: ${{ always() }}
@@ -313,10 +319,10 @@ jobs:
       group: gh-pages-publish
       cancel-in-progress: false
     steps:
-      - name: Checkout repository
+      - name: 检出仓库
         uses: actions/checkout@v4
 
-      - name: Restore existing GitHub Pages content
+      - name: 恢复现有 GitHub Pages 内容
         run: |
           set -euo pipefail
 
@@ -326,7 +332,7 @@ jobs:
             git --work-tree=gh-pages-content checkout FETCH_HEAD -- .
           fi
 
-      - name: Update downloads badge data
+      - name: 更新下载徽章数据
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -334,7 +340,7 @@ jobs:
             "$GITHUB_WORKSPACE/gh-pages-content/downloads.json" \
             "$GITHUB_REPOSITORY"
 
-      - name: Download all feed artifacts
+      - name: 下载所有软件源构建产物
         uses: actions/download-artifact@v4
         continue-on-error: true
         with:
@@ -342,16 +348,16 @@ jobs:
           pattern: feed-*
           merge-multiple: true
 
-      - name: Check publishable feed content
+      - name: 检查可发布的软件源内容
         run: |
           set -euo pipefail
 
           if [ -z "$(find gh-pages-content -name packages.adb -type f -print -quit)" ]; then
-            echo "No successful feed artifacts and no existing gh-pages feed content found."
+            echo "未找到成功构建的软件源产物或现有的 gh-pages 软件源内容。"
             exit 1
           fi
 
-      - name: Generate GitHub Pages site
+      - name: 生成 GitHub Pages 网站
         run: |
           set -euo pipefail
 
@@ -359,7 +365,7 @@ jobs:
             "$GITHUB_WORKSPACE/gh-pages-content" \
             "https://slava-shchipunov.github.io/awg-openwrt"
 
-      - name: Publish to GitHub Pages branch
+      - name: 发布到 GitHub Pages 分支
         # Existing gh-pages content is restored above, then republished as one complete tree.
         uses: peaceiris/actions-gh-pages@v4
         with:

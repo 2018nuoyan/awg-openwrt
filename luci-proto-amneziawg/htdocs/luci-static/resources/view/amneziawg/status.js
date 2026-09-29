@@ -27,7 +27,7 @@ function timestampToStr(timestamp) {
 	else
 		ago = _('over a day ago');
 
-	return (new Date(timestamp * 1000)).toUTCString() + ' (' + ago + ')';
+	return (new Date(timestamp * 1000)).toLocaleString() + ' (' + ago + ')';
 }
 
 function handleInterfaceDetails(iface) {
