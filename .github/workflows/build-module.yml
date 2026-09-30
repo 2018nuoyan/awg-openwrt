@@ -101,14 +101,14 @@ jobs:
           echo "软件包架构：${{ matrix.build_env.pkgarch }}，目标平台：${{ matrix.build_env.target }}，子目标平台：${{ matrix.build_env.subtarget }}"
 
           # Get the actual SDK filename from the directory listing
-          SDK_FILE=$(curl -s "https://downloads.openwrt.org/releases/${{ matrix.build_env.tag }}/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/" | grep -o "openwrt-sdk-${{ matrix.build_env.tag }}-${{ matrix.build_env.target}}-${{ matrix.build_env.subtarget}}_gcc-[^\"]*_musl[^\"]*\.Linux-x86_64\.tar\.[xz|zst]*" | head -n1)
+          SDK_FILE=$(curl -s "https://downloads.immortalwrt.org/releases//${{ matrix.build_env.tag }}/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/" | grep -o "openwrt-sdk-${{ matrix.build_env.tag }}-${{ matrix.build_env.target}}-${{ matrix.build_env.subtarget}}_gcc-[^\"]*_musl[^\"]*\.Linux-x86_64\.tar\.[xz|zst]*" | head -n1)
           
           if [ -z "$SDK_FILE" ]; then
             echo "未找到适用于 ${{ matrix.build_env.tag }} ${{ matrix.build_env.target}} ${{ matrix.build_env.subtarget}} 的 SDK 文件"
             exit 1
           fi
           
-          SDK_DOWNLOAD_URL="https://downloads.openwrt.org/releases/${{ matrix.build_env.tag }}/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/${SDK_FILE}"
+          SDK_DOWNLOAD_URL="https://downloads.immortalwrt.org/releases//${{ matrix.build_env.tag }}/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/${SDK_FILE}"
           echo "正在下载 SDK：$SDK_DOWNLOAD_URL"
           
           wget "$SDK_DOWNLOAD_URL"
