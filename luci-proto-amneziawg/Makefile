@@ -1,5 +1,8 @@
 include $(TOPDIR)/rules.mk
 
+LUCI_NAME:=luci-proto-amneziawg
+PKG_NAME:=luci-proto-amneziawg
+
 LUCI_TITLE:=AmneziaWG VPN 支持
 LUCI_DESCRIPTION:=提供 AmneziaWG VPN 协议支持和 Web 管理界面
 PKG_VERSION:=3.1.0
