@@ -92,7 +92,7 @@ jobs:
         env:
           cache-name: "cache-sdk-${{ matrix.build_env.tag }}-${{ matrix.build_env.target}}-${{ matrix.build_env.subtarget}}"
         with:
-          path: openwrt-sdk-*/
+          path: immortalwrt-sdk-*/
           key: ${{ runner.os }}-sdk-${{ env.cache-name }}
 
       - name: 下载并解压 OpenWrt SDK
@@ -101,7 +101,7 @@ jobs:
           echo "软件包架构：${{ matrix.build_env.pkgarch }}，目标平台：${{ matrix.build_env.target }}，子目标平台：${{ matrix.build_env.subtarget }}"
 
           # Get the actual SDK filename from the directory listing
-          SDK_FILE=$(curl -s "https://downloads.immortalwrt.org/releases/${{ matrix.build_env.tag }}/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/" | grep -o "openwrt-sdk-${{ matrix.build_env.tag }}-${{ matrix.build_env.target}}-${{ matrix.build_env.subtarget}}_gcc-[^\"]*_musl[^\"]*\.Linux-x86_64\.tar\.[xz|zst]*" | head -n1)
+          SDK_FILE=$(curl -s "https://downloads.immortalwrt.org/releases/${{ matrix.build_env.tag }}/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/" | grep -o "immortalwrt-sdk-${{ matrix.build_env.tag }}-${{ matrix.build_env.target}}-${{ matrix.build_env.subtarget}}_gcc-[^\"]*_musl[^\"]*\.Linux-x86_64\.tar\.[xz|zst]*" | head -n1)
           
           if [ -z "$SDK_FILE" ]; then
             echo "未找到适用于 ${{ matrix.build_env.tag }} ${{ matrix.build_env.target}} ${{ matrix.build_env.subtarget}} 的 SDK 文件"
@@ -128,7 +128,7 @@ jobs:
       - name: 配置 SDK 和软件源
         run: |
           # Find SDK directory
-          SDK_DIR=$(find . -maxdepth 1 -name "openwrt-sdk-*" -type d | head -n1)
+          SDK_DIR=$(find . -maxdepth 1 -name "immortalwrt-sdk-*" -type d | head -n1)
           
           if [ -z "$SDK_DIR" ]; then
             echo "未找到 SDK 目录"
@@ -161,7 +161,7 @@ jobs:
       - name: 构建 AmneziaWG 软件包
         run: |
           # Find SDK directory
-          SDK_DIR=$(find . -maxdepth 1 -name "openwrt-sdk-*" -type d | head -n1)
+          SDK_DIR=$(find . -maxdepth 1 -name "immortalwrt-sdk-*" -type d | head -n1)
           cd "$SDK_DIR"
 
           echo "正在构建 AmneziaWG 软件包…"
@@ -178,7 +178,7 @@ jobs:
       - name: 准备构建产物
         run: |
           # Find SDK directory
-          SDK_DIR=$(find . -maxdepth 1 -name "openwrt-sdk-*" -type d | head -n1)
+          SDK_DIR=$(find . -maxdepth 1 -name "immortalwrt-sdk-*" -type d | head -n1)
           
           mkdir -p awgrelease
           postfix="v${{ matrix.build_env.tag }}_${{ matrix.build_env.pkgarch}}_${{ matrix.build_env.target}}_${{ matrix.build_env.subtarget}}"
